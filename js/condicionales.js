@@ -246,7 +246,6 @@ sola decisión, controlando el flujo del programa de forma más precisa.
 */
 
 
-
 // ========================================================================================================
 /* 
 *3. INVESTIGACIÓN: ARRAYS (ARREGLOS)
@@ -275,6 +274,7 @@ los nombres de una base de datos o los elementos de un carrito de compras.
 
 // * CONFIGURACIÓN INICIAL (Array)
 const herramientas = ['Martillo', 'Destornillador'];
+
 
 /*
 *1. FUNCIÓN push()
@@ -359,7 +359,9 @@ para acceder a la información, lo que hace que el código sea mucho más fácil
 
 *Propiedades: 
 Son las características o variables del objeto (ej. color, marca, precio).
-Métodos: Son funciones que viven dentro del objeto y definen lo que el objeto puede 
+
+*Métodos: 
+Son funciones que viven dentro del objeto y definen lo que el objeto puede 
 hacer (ej. encender, calcularIva, saludar).
 
 *Estructura Clave-Valor: 
@@ -382,6 +384,7 @@ const celular = {
         return "El sistema operativo se está iniciando... Celular prendido."; 
     }
 };
+
 
 /*
 *1. LLAMADA A UN MÉTODO (Función del objeto)
@@ -417,8 +420,6 @@ Se usa para obtener directamente la información almacenada sin importar el nomb
 console.log(Object.values(celular)); 
 // * Resultado: ["Samsung", "S24", function encender()]
 // * Muestra los valores del objeto, incluyendo el método como función
-
-
 
 /*
 * Explicación:
@@ -458,6 +459,7 @@ de datos son el 'for' tradicional (por su control total) y el 'for...of' (por su
 // * CONFIGURACIÓN INICIAL (Array)
 const equipos = ['Cali', 'América', 'Nacional'];
 
+
 /*
 * EJEMPLO 1: Ciclo 'for' tradicional
 Es el más potente y flexible. Se compone de tres partes:
@@ -471,7 +473,6 @@ sea menor que el tamaño de la lista.
 
 *3. Actualización (i++): 
 El contador aumenta de uno en uno en cada vuelta.
-
 Es ideal cuando necesitamos saber exactamente en qué posición (índice) estamos.
 
 */
@@ -581,8 +582,6 @@ cargarDatosUsuario
     });
 // * Dependiendo del resultado, muestra éxito o error después de 2 segundos
 
-
-
 /*
 * Explicación:
 El programa trabaja con promesas para manejar operaciones que no se ejecutan de forma inmediata.
@@ -627,6 +626,7 @@ para convertir esos datos crudos en un objeto de JavaScript que podamos manipula
 Es la base de casi cualquier aplicación moderna, desde 
 ver el clima en una app hasta cargar los posts de una red social en tiempo real.
 */
+
 
 // * Ejemplo práctico: Consultando datos desde un archivo local (simulando una API)
 
@@ -685,7 +685,6 @@ puede manejar múltiples tareas sin bloquear la ejecución principal del program
 */
 
 
-
 // ==========================================
 // * CONCLUSIÓN Y BIBLIOGRAFÍA
 // ==========================================
@@ -717,6 +716,6 @@ hacia niveles más complejos del desarrollo de software.
 
 
 /*                    
- * FIN DE LA TAREA 
+* FIN DE LA TAREA 
 */
 
