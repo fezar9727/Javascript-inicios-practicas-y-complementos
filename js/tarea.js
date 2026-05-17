@@ -983,7 +983,7 @@ episodios y ubicaciones de la serie animada. No requiere registro ni clave de ac
 lo que la hace perfecta para aprender a consumir APIs reales.
 
 *URL base de la API:
-https://rickandmortyapi.com/api/
+*   https://rickandmortyapi.com/api/
 
 *Endpoints disponibles:
 /character     → todos los personajes (paginado)
@@ -1054,16 +1054,16 @@ function preguntarNumeroPersonaje() {
 }
 
 // El usuario elige qué personaje consultar
-const numeroPersonaje = preguntarNumeroPersonaje();
+const numeroPersonajeObjetos = preguntarNumeroPersonaje();
 
-if (numeroPersonaje === null) {
+if (numeroPersonajeObjetos === null) {
     console.log('Operación cancelada por el usuario.');
 } else {
-    console.log(`\nConsultando personaje #${numeroPersonaje} en la API de Rick and Morty...`);
+    console.log(`\nConsultando personaje #${numeroPersonajeObjetos} en la API de Rick and Morty...`);
 
     // fetch() hace la petición HTTP a la API — devuelve una Promesa
     // La API de Rick and Morty es pública y gratuita — no requiere registro
-    fetch(`https://rickandmortyapi.com/api/character/${numeroPersonaje}`)
+fetch(`https://rickandmortyapi.com/api/character/${numeroPersonajeObjetos}`)
         .then(respuesta => {
             // Verificamos si la respuesta fue exitosa
             if (!respuesta.ok) {
@@ -1532,11 +1532,11 @@ function preguntarNumeroPersonaje() {
 
 // * EJEMPLO 1: Fetch con archivo local (simulando una API)
 // * CONFIGURACIÓN INICIAL (URL local)
-const URL = './js/usuario.json';
+const urlLocal = './js/usuario.json';
 
 console.log("Iniciando petición con fetch...");
 
-fetch(URL)
+fetch(urlLocal)
     .then(respuesta => {
         // Verificamos si la respuesta del archivo fue exitosa
         if (!respuesta.ok) {

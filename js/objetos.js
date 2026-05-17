@@ -376,16 +376,16 @@ function preguntarNumeroPersonaje() {
 }
 
 // El usuario elige qué personaje consultar
-const numeroPersonaje = preguntarNumeroPersonaje();
+const numeroPersonajeObjetos = preguntarNumeroPersonaje();
 
-if (numeroPersonaje === null) {
+if (numeroPersonajeObjetos !== null) {
     console.log('Operación cancelada por el usuario.');
 } else {
-    console.log(`\nConsultando personaje #${numeroPersonaje} en la API de Rick and Morty...`);
+    console.log(`\nConsultando personaje #${numeroPersonajeObjetos} en la API de Rick and Morty...`);
 
     // fetch() hace la petición HTTP a la API — devuelve una Promesa
     // La API de Rick and Morty es pública y gratuita — no requiere registro
-    fetch(`https://rickandmortyapi.com/api/character/${numeroPersonaje}`)
+fetch(`https://rickandmortyapi.com/api/character/${numeroPersonajeObjetos}`)
         .then(respuesta => {
             // Verificamos si la respuesta fue exitosa
             if (!respuesta.ok) {
