@@ -14,7 +14,7 @@ const obtenerDatos = async () => {
             `;
         });
     } catch(error) {    //aca los errores son atrapados por el catch
-        console.error(`Error al obtener los datos: ${error}`);
+        console.error(`Error al obtener los titulos: ${error}`);
     }
 };
 
