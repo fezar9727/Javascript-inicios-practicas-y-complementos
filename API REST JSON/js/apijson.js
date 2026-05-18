@@ -8,8 +8,8 @@ const obtenerDatos = async () => {
         console.log(data);
         data.forEach(datos => {
             contenedor.innerHTML += `
-                <div class="col-md-6 col-lg-4 text-center">
-                    <h2>${ datos.title }</h2>
+                <div class="col-md-6 col-lg-4 text-center card mb-4">
+                    <h2 class="card-title">${ datos.title }</h2>
                 </div>
             `;
         });
