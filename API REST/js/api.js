@@ -16,7 +16,7 @@ const obtenerPersonajes = async () => {
 
         data.results.forEach(personaje => {
             const badgeBg = personaje.status === 'Alive' ? 'bg-success' : 
-                           personaje.status === 'Dead' ? 'bg-danger' : 'bg-secondary';
+                            personaje.status === 'Dead' ? 'bg-danger' : 'bg-secondary';
 
             const article = document.createElement("article");
             article.className = "col-sm-6 col-md-4 col-lg-3";
