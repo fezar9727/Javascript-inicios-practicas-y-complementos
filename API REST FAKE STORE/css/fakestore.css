@@ -1,0 +1,109 @@
+/* =========================================
+    VARIABLES Y CONFIGURACIÓN BASE
+   ========================================= */
+:root {
+    --primario: #007bff;        
+    --fondo-tarjeta: #ffffff;   
+    --texto-principal: #212529; 
+    --texto-secundario: #6c757d; 
+    --sombra: rgba(0, 0, 0, 0.08);
+}
+
+/* Contenedor principal de las tarjetas */
+#contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+/* =========================================
+    TARJETAS DE PRODUCTOS 
+   ========================================= */
+.tarjeta-producto {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    height: 100%; 
+}
+
+/* Efecto hover de la tarjeta */
+.tarjeta-producto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--sombra);
+    border-color: #dee2e6;
+}
+
+/* Contenedor de imagen de la tarjeta */
+.contenedor-imagen {
+    background: #f8f9fa; 
+    border-radius: 8px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    padding: 20px;
+    flex-shrink: 0; 
+}
+
+/* Imagen del producto */
+.imagen-producto {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    mix-blend-mode: multiply; 
+}
+
+
+/* =========================================
+    CONTENIDO DE LA TARJETA
+   ========================================= */
+
+/* Etiqueta de categoría */
+.categoria-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--texto-secundario);
+    background: #e9ecef;
+    padding: 4px 12px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Cuerpo de la tarjeta */
+.cuerpo-tarjeta {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nombre del producto */
+.titulo-producto {
+    color: var(--texto-principal);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    height: 2.8rem; 
+    overflow: hidden; 
+    display: block; 
+}
+
+/* Precio del producto */
+.info-precio {
+    color: var(--primario);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: auto; 
+    padding-top: 10px;
+} 
