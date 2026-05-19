@@ -26,7 +26,7 @@ base de datos o una API llega en formato de objeto (JSON). Dominarlos es obligat
 // *Ejemplo práctico: Representación de un Celular
 
 // * MARCAS Y MODELOS PERMITIDOS — solo estos se pueden ingresar
-// Para escalar: solo agrega más marcas y modelos aquí, el resto del código no se toca
+// Esto hace que el programa sea escalable: para agregar más marcas o modelos, solo se tocan estas dos estructuras
 const marcasPermitidas = ['Samsung', 'Apple', 'Xiaomi', 'Huawei', 'Motorola', 'Sony', 'LG', 'Nokia', 'OnePlus', 'Google'];
 const modelosPermitidos = {
     'Samsung': ['S24', 'S23', 'A54', 'A34', 'M54'],
@@ -41,10 +41,11 @@ const modelosPermitidos = {
     'Google':  ['Pixel 8', 'Pixel 8 Pro', 'Pixel 7a']
 };
 
-// Función reutilizable que valida que el usuario escriba una marca permitida
+// Función reutilizable que valida que el usuario escriba una marca válida
 // Usa while(true) para repetir hasta obtener una respuesta válida
 function preguntarMarca() {
     while (true) {
+        // El mensaje muestra las marcas disponibles usando .join(', ') para convertir el array en texto legible
         const respuesta = prompt('¿Cuál es la marca del celular?\nMarcas disponibles: ' + marcasPermitidas.join(', '));
 
         // Si el usuario cancela el prompt, se detiene todo
@@ -53,30 +54,34 @@ function preguntarMarca() {
             return null;
         }
 
+        // .trim() elimina espacios al inicio y al final
         const respuestaLimpia = respuesta.trim();
 
+        // Si luego de limpiar espacios queda algo, es una marca valida, si no, avisa y vuelve a preguntar
         if (respuestaLimpia === '') {
             alert('Por favor escribe una marca.');
             continue;
         }
 
-        // .some() + .toLowerCase() para que no importe mayúsculas
+        // .toLowerCase() para que no importe mayúsculas o minúsculas
         const marcaValida = marcasPermitidas.find(m => m.toLowerCase() === respuestaLimpia.toLowerCase());
 
+        // .find() devuelve undefined si no encuentra la marca, por eso se valida con if(marcaValida)
         if (marcaValida) {
-            // Retorna la marca con la capitalización correcta de la lista
+            // Si la marca es valida, se devuelve
             return marcaValida;
         }
 
+        // Si la marca no es valida, avisa y vuelve a preguntar automáticamente
         alert(`"${respuestaLimpia}" no es una marca válida.\nEscribe una de la lista.`);
     }
 }
 
-// Función reutilizable que valida que el usuario escriba un modelo de la marca elegida
+// Función reutilizable que valida que el usuario escriba un modelo valido para la marca ingresada
 // Usa while(true) para repetir hasta obtener una respuesta válida
 function preguntarModelo(marca) {
     const modelos = modelosPermitidos[marca];
-
+    
     while (true) {
         const respuesta = prompt(`¿Cuál es el modelo del ${marca}?\nModelos disponibles: ` + modelos.join(', '));
 
@@ -86,36 +91,46 @@ function preguntarModelo(marca) {
             return null;
         }
 
+        // .trim() elimina espacios al inicio y al final
         const respuestaLimpia = respuesta.trim();
 
+        // Si luego de limpiar espacios queda algo, es un modelo valido, si no, avisa y vuelve a preguntar
         if (respuestaLimpia === '') {
             alert('Por favor escribe un modelo.');
             continue;
         }
 
-        // .find() + .toLowerCase() para que no importe mayúsculas
+        // .toLowerCase() para que no importe mayúsculas o minúsculas, y .find() para validar que el modelo exista en la lista de la marca
         const modeloValido = modelos.find(m => m.toLowerCase() === respuestaLimpia.toLowerCase());
 
+        // .find() devuelve undefined si no encuentra el modelo, por eso se valida con if(modeloValido)
         if (modeloValido) {
-            // Retorna el modelo con la capitalización correcta de la lista
+            // Si el modelo es valido, se devuelve
             return modeloValido;
         }
 
+        // Si el modelo no es valido, avisa y vuelve a preguntar automáticamente
         alert(`"${respuestaLimpia}" no es un modelo válido para ${marca}.\nEscribe uno de la lista.`);
     }
 }
 
-// El usuario elige la marca y el modelo del celular
+
+// El usuario elige la marca del celular
 const marcaElegida = preguntarMarca();
 
-// Solo continúa si el usuario no canceló
+// Si el usuario cancela el prompt, se detiene todo
 if (marcaElegida === null) {
     console.log('Operación cancelada por el usuario.');
+
+// Si la marca es valida, se pregunta el modelo correspondiente a esa marca
 } else {
     const modeloElegido = preguntarModelo(marcaElegida);
 
+    // Si el usuario cancela el prompt, se detiene todo
     if (modeloElegido === null) {
         console.log('Operación cancelada por el usuario.');
+
+    // Si el modelo es valido, se pregunta si quiere encender el celular
     } else {
 
         // * CONFIGURACIÓN INICIAL (Objeto)
@@ -128,6 +143,7 @@ if (marcaElegida === null) {
                 return `El sistema operativo del ${this.marca} ${this.modelo} se está iniciando... Celular prendido.`;
             }
         };
+
 
         /*
         *1. LLAMADA A UN MÉTODO (Función del objeto)
@@ -360,13 +376,14 @@ function preguntarNumeroPersonaje() {
         // .trim() evita espacios vacíos
         // isNaN() verifica si lo ingresado NO es un número
         if (!isNaN(respuesta) && respuesta.trim() !== '') {
-            // parseInt() convierte el texto "25" al número real 25
+            // parseInt() convierte el texto a número entero
             const numero = parseInt(respuesta);
 
-            // Validamos que esté en el rango válido de la API
+            // Validamos el número para que esté dentro del rango permitido por la API (1-826)
             if (numero >= 1 && numero <= 826) {
                 return numero;
             }
+            // Si el número está fuera del rango, avisa y vuelve a preguntar
             alert('El número debe estar entre 1 y 826.\nIntenta con: 1, 25, 100, 500...');
         } else {
             // Si escribió texto como "veinticinco", avisa y vuelve a preguntar
@@ -375,12 +392,14 @@ function preguntarNumeroPersonaje() {
     }
 }
 
-// El usuario elige qué personaje consultar
+// El usuario elige el número de personaje que quiere consultar
 const numeroPersonajeObjetos = preguntarNumeroPersonaje();
 
+// Si el usuario cancela el prompt, se detiene todo
 if (numeroPersonajeObjetos !== null) {
     console.log('Operación cancelada por el usuario.');
 } else {
+    // Si el número de personaje es válido, se consulta la API
     console.log(`\nConsultando personaje #${numeroPersonajeObjetos} en la API de Rick and Morty...`);
 
     // fetch() hace la petición HTTP a la API — devuelve una Promesa
@@ -391,7 +410,7 @@ fetch(`https://rickandmortyapi.com/api/character/${numeroPersonajeObjetos}`)
             if (!respuesta.ok) {
                 throw new Error('No se encontró el personaje. El número puede estar fuera del rango.');
             }
-            // .json() convierte la respuesta HTTP en un objeto JavaScript
+            // .json() convierte la respuesta de texto JSON a un objeto JavaScript
             return respuesta.json();
         })
         .then(personaje => {
@@ -484,10 +503,11 @@ fetch(`https://rickandmortyapi.com/api/character/${numeroPersonajeObjetos}`)
                 origen:    personaje.origin.name,
                 ubicacion: personaje.location.name
             };
+            // Muestra el resumen en formato JSON con sangría para mejor lectura
             console.log(JSON.stringify(resumen, null, 2));
         })
         .catch(error => {
-            // Si hay algún error en la petición o en el proceso de datos
+            // Si hay un error al consultar la API, se captura aquí
             console.error('Error al consultar la API: ' + error.message);
         });
 }

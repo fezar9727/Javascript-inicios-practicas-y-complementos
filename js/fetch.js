@@ -41,10 +41,10 @@ function preguntarNumeroPersonaje() {
         // .trim() evita espacios vacíos
         // isNaN() verifica si lo ingresado NO es un número
         if (!isNaN(respuesta) && respuesta.trim() !== '') {
-            // parseInt() convierte el texto "25" al número real 25
+            // parseInt() convierte el texto a número entero
             const numero = parseInt(respuesta);
 
-            // Validamos que esté en el rango válido de la API
+            // Validamos que el número esté dentro del rango permitido por la API (1-826)
             if (numero >= 1 && numero <= 826) {
                 return numero;
             }
@@ -68,7 +68,7 @@ fetch(URL)
         if (!respuesta.ok) {
             throw new Error("No se pudo cargar el archivo local.");
         }
-        // Convertimos la respuesta a formato JSON (objeto usable en JS)
+        // Convertimos la respuesta a formato JSON para obtener un objeto de JavaScript
         return respuesta.json();
     })
     .then(usuario => {
@@ -78,7 +78,7 @@ fetch(URL)
         console.log("Ciudad: " + usuario.address.city);
     })
     .catch(error => {
-        // Si hay un error al cargar el archivo o procesar los datos
+        // Si hay un error en la petición o en el proceso de datos, lo capturamos aquí
         console.error("Hubo un problema con la petición: ", error.message);
     });
 
@@ -91,20 +91,22 @@ console.log("Este mensaje aparece antes que los datos porque fetch trabaja de fo
 // porque la entrada del usuario ocurre ANTES de la petición asíncrona
 const numeroPersonaje = preguntarNumeroPersonaje();
 
+// Si el usuario cancela el prompt, se detiene todo y no se hace la petición
 if (numeroPersonaje !== null) {
     console.log(`\nConsultando personaje #${numeroPersonaje}...`);
 
+    // fetch() hace la petición HTTP a la API de Rick and Morty usando el número elegido por el usuario
     fetch(`https://rickandmortyapi.com/api/character/${numeroPersonaje}`)
         .then(respuesta => {
             // Verificamos si la respuesta fue exitosa
             if (!respuesta.ok) {
                 throw new Error("No se encontró el personaje.");
             }
-            // Convertimos la respuesta a formato JSON
+            // Convertimos la respuesta a formato JSON para obtener un objeto de JavaScript con los datos del personaje
             return respuesta.json();
         })
         .then(personaje => {
-            // Accedemos a las propiedades del objeto recibido
+            // Acá ya tenemos el objeto de JavaScript con los datos del personaje
             console.log("\n--- Personaje encontrado ---");
             console.log("Nombre: "  + personaje.name);
             console.log("Estado: "  + personaje.status);
@@ -112,7 +114,7 @@ if (numeroPersonaje !== null) {
             console.log("Origen: "  + personaje.origin.name);
         })
         .catch(error => {
-            // Si hay un error en la petición o en el proceso de datos
+            // Si hay un error en la petición o en el proceso de datos, lo capturamos aquí
             console.error("Error con la API: " + error.message);
         });
 

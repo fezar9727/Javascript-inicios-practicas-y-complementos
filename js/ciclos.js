@@ -18,17 +18,15 @@ de datos son el 'for' tradicional (por su control total) y el 'for...of' (por su
 */
 
 // * CONFIGURACIÓN INICIAL (Array)
-// Para escalar: solo agrega más equipos aquí, el resto del código no se toca
+// Creamos un array con los nombres de algunos equipos de fútbol para usarlo en nuestros ejemplos
 const equipos = ['Cali', 'América', 'Nacional', 'Millonarios', 'Junior', 'Santa Fe'];
 
-// Función auxiliar que elimina acentos y convierte a minúsculas para comparar
-// Así "América", "AMERICA" o "america" se tratan como lo mismo
+// Función para normalizar texto eliminando acentos y convirtiendo a minúsculas
 function normalizar(texto) {
     return texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-// Función reutilizable que pide un equipo válido de la lista
-// Usa while(true) para repetir hasta obtener una respuesta válida
+// Función para preguntar al usuario por el equipo que quiere buscar
 function preguntarEquipo(pregunta) {
     while (true) {
         const respuesta = prompt(pregunta + '\nEquipos disponibles: ' + equipos.join(', '));
@@ -55,6 +53,7 @@ function preguntarEquipo(pregunta) {
             return equipoValido;
         }
 
+        // Si no es un equipo valido, avisa y vuelve a preguntar automáticamente
         alert(`"${respuestaLimpia}" no es un equipo válido.\nEscribe uno de la lista.`);
     }
 }
@@ -86,7 +85,7 @@ if (equipoBuscado !== null) {
     }
     // * Recorre el array mostrando cada equipo junto con su posición (índice)
 
-    // Muestra en qué posición está el equipo buscado
+    // Además, con .findIndex() podemos mostrar en qué posición está el equipo que el usuario buscó
     const posicion = equipos.findIndex(e => normalizar(e) === normalizar(equipoBuscado));
     console.log(`\n"${equipoBuscado}" está en la posición ${posicion} de la lista.`);
 }
@@ -105,7 +104,7 @@ solo nos interesa el contenido y no la posición.
 if (equipoBuscado !== null) {
     console.log('\n--- Ciclo for...of ---');
     for (const equipo of equipos) {
-        // Usamos normalizar() para comparar sin importar acentos ni mayúsculas
+        // Usamos normalizar() para comparar sin importar mayúsculas, minúsculas o acentos
         if (normalizar(equipo) === normalizar(equipoBuscado)) {
             console.log(`✓ Encontrado: ${equipo}`);
         } else {

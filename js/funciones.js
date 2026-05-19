@@ -16,6 +16,9 @@ saludar();
 
 
 //que son los backtics y como colocarlos en su teclado
+
+// mis backtics los obtengo con la tecla ALT GR + la tecla de cerradura de parentesis o corchetes
+
 const saludar = (nombre, apellido) => {
     // console.log('Hola ' + nombre);
     console.log(`Hola mi nombre es: ${ nombre } y mi apellido es: ${apellido}`);
@@ -36,7 +39,7 @@ suma(197, 698);
 
 
 // forma corta
-const sumar = (a, b=2) => {
+const sumar = (a, b) => {
     console.log(`reultado : ${a + b}`);
 }
 
@@ -44,5 +47,5 @@ sumar(268, 406);
 sumar(2, 46);
 sumar(68, 4);
 sumar(268, 406);
-sumar(268,);
+sumar(268, 598);
 

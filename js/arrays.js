@@ -24,7 +24,7 @@ los nombres de una base de datos o los elementos de un carrito de compras.
 // * Ejemplo práctico de Arrays con 3 funciones principales:
 
 // * CONFIGURACIÓN INICIAL (Array)
-// El inventario base con el que inicia el programa
+// El array que almacena las herramientas en el inventario
 const herramientas = ['Martillo', 'Destornillador'];
 
 // Lista de herramientas permitidas — solo estas se pueden agregar o buscar
@@ -35,19 +35,15 @@ const herramientasPermitidas = [
     'Flexómetro', 'Escuadra', 'Plomada', 'Paleta', 'Espátula', 'Pinza', 'Cortafríos', 'Punzón', 'Berbiquí', 'Gato hidráulico'
 ];
 
-// Función auxiliar que elimina acentos y convierte a minúsculas para comparar
-// Así "Flexómetro", "FLEXOMETRO" o "flexometro" se tratan como lo mismo
-// Esta función es compartida por toda la sección de arrays y arrays de objetos
+// Función para normalizar texto: convierte a minúsculas y elimina acentos
 function normalizar(texto) {
     return texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-// Función reutilizable que pide texto al usuario y valida que no esté vacío
-// y que además sea una herramienta de la lista permitida
-// Usa while(true) para repetir hasta obtener una respuesta válida
+// Función para preguntar al usuario por el nombre de una herramienta
 function preguntarTexto(pregunta) {
     while (true) {
-        // Muestra la lista de herramientas disponibles en el mismo prompt
+        // El prompt muestra la pregunta y la lista de herramientas permitidas para que el usuario elija
         const respuesta = prompt(pregunta + '\nHerramientas disponibles: ' + herramientasPermitidas.join(', '));
 
         // Si el usuario cancela el prompt, se detiene todo
@@ -56,11 +52,10 @@ function preguntarTexto(pregunta) {
             return null;
         }
 
-        // .trim() elimina espacios en blanco al inicio y al final
-        // Si después de limpiar espacios queda algo, es válido
+        // .trim() elimina espacios en blanco al inicio y al final para evitar que "   " cuente como texto válido
         const respuestaLimpia = respuesta.trim();
 
-        // .trim() también evita que "   " cuente como texto válido
+        // Si el usuario no escribe nada, avisa y vuelve a preguntar automáticomente
         if (respuestaLimpia === '') {
             alert('Por favor escribe el nombre de la herramienta.');
             continue;
@@ -71,6 +66,7 @@ function preguntarTexto(pregunta) {
         // si el usuario escribe "flexometro", "FLEXÓMETRO" o "Flexómetro"
         const esValida = herramientasPermitidas.some(h => normalizar(h) === normalizar(respuestaLimpia));
 
+        // Si es una herramienta valida, la devuelve y sale del while, si no, avisa y vuelve a preguntar automáticamente
         if (esValida) {
             return respuestaLimpia;
         }
@@ -208,8 +204,7 @@ y las bases de datos en la nube.
 */
 
 // * CONFIGURACIÓN INICIAL (Array de Objetos)
-// El inventario ahora es una colección detallada de entidades
-// Para escalar: solo agrega más objetos aquí, el resto del código no se toca
+// El inventario de herramientas ahora es un array de objetos, donde cada objeto representa una herramienta con varias propiedades
 const inventario = [
     { id: 1, nombre: 'Martillo',      precio: 25000,  stock: 10, categoria: 'Manual'    },
     { id: 2, nombre: 'Taladro',       precio: 180000, stock: 5,  categoria: 'Eléctrica' },
@@ -218,12 +213,12 @@ const inventario = [
     { id: 5, nombre: 'Lijadora',      precio: 120000, stock: 3,  categoria: 'Eléctrica' }
 ];
 
-// Lista de nombres válidos extraída del inventario — evita escribirla dos veces
-// Si agregas un producto al inventario, automáticamente queda disponible para buscar
+// Lista de nombres válidos extraída del inventario para validar entradas del usuario sin tener que escribirlos a mano
 const nombresValidos = inventario.map(item => item.nombre);
 
-// Lista de categorías válidas extraída del inventario
+// Lista de categorías válidas extraída del inventario usando Set para eliminar duplicados
 const categoriasValidas = [...new Set(inventario.map(item => item.categoria))];
+
 
 // Función reutilizable que pide un nombre de producto válido
 // Usa while(true) para repetir hasta obtener una respuesta válida
@@ -245,14 +240,16 @@ function preguntarNombreProducto(pregunta) {
             continue;
         }
 
-        // normalizar() elimina acentos y convierte a minúsculas para que no importe
-        // si el usuario escribe "llave inglesa", "LLAVE INGLESA" o "Llave Inglesa"
+        // .find() recorre el array y verifica si alguno coincide
+        //  normalizar() elimina acentos y convierte a minúsculas para que no importe
+        // si el usuario escribe "america", "AMÉRICA" o "América" 
         const productoValido = inventario.find(item => normalizar(item.nombre) === normalizar(respuestaLimpia));
 
         if (productoValido) {
             return productoValido.nombre;
         }
 
+        // Si no se encuentra, avisa y vuelve a preguntar automáticamente
         alert(`"${respuestaLimpia}" no existe en el inventario.\nEscribe uno de la lista.`);
     }
 }
@@ -269,21 +266,26 @@ function preguntarCategoria(pregunta) {
             return null;
         }
 
+        // .trim() elimina espacios al inicio y al final para evitar que "   " cuente como texto válido
         const respuestaLimpia = respuesta.trim();
 
+        // Si el usuario no escribe nada, avisa y vuelve a preguntar automáticomente
         if (respuestaLimpia === '') {
             alert('Por favor escribe una categoría.');
             continue;
         }
 
-        // normalizar() elimina acentos y convierte a minúsculas para que no importe
+        // .find() recorre el array y verifica si alguno coincide
+        //  normalizar() elimina acentos y convierte a minúsculas para que no importe
         // si el usuario escribe "electrica", "ELÉCTRICA" o "Eléctrica"
         const categoriaValida = categoriasValidas.find(c => normalizar(c) === normalizar(respuestaLimpia));
 
+        // Si se encuentra, la devuelve y sale del while, si no, avisa y vuelve a preguntar automáticamente
         if (categoriaValida) {
             return categoriaValida;
         }
 
+        // Si no se encuentra, avisa y vuelve a preguntar automáticamente   
         alert(`"${respuestaLimpia}" no es una categoría válida.\nEscribe una de la lista.`);
     }
 }
@@ -298,7 +300,7 @@ o tiene espacios, usamos corchetes [].
 *Ejemplo de acceso:
 console.log(inventario[0].nombre); // Resultado: Martillo
 */
-// Mostramos el primer producto del inventario usando notación de punto
+// Mostramos el nombre y precio del primer producto usando notación de punto para acceder a las propiedades del objeto dentro del array
 console.log('* Acceso directo: ' + inventario[0].nombre + ' — $' + inventario[0].precio);
 
 
@@ -311,13 +313,14 @@ array y devuelve el OBJETO COMPLETO que coincida con la búsqueda.
 Buscar un producto específico por su nombre o ID para mostrar sus detalles.
 */
 
-// El usuario decide qué producto buscar
+// El usuario decide qué producto buscar en el inventario
 const nombreBuscado = preguntarNombreProducto('¿Qué producto quieres buscar?');
 
 if (nombreBuscado !== null) {
-    // normalizar() para búsqueda sin importar mayúsculas ni acentos
+    // normalizar() para buscar sin importar mayúsculas ni acentos
     const productoEncontrado = inventario.find(item => normalizar(item.nombre) === normalizar(nombreBuscado));
 
+    // Si se encuentra, muestra sus detalles, si no, el programa ya se encargó de avisar en la función preguntarNombreProducto()
     if (productoEncontrado) {
         console.log(`* Resultado find(): ${productoEncontrado.nombre} — Precio: $${productoEncontrado.precio} — Stock: ${productoEncontrado.stock}`);
     }
@@ -352,7 +355,7 @@ solo una parte de la información o realizar cálculos masivos.
 Extraer solo los nombres para una lista o aplicar un descuento general a los precios.
 */
 
-// .map() extrae solo los nombres de todos los productos del inventario
+// .map() para extraer solo los nombres de todos los productos en el inventario, creando un nuevo array con solo esa información
 const listaNombres = inventario.map(item => item.nombre);
 console.log('* Resultado map() (Nombres): ' + listaNombres.join(', '));
 

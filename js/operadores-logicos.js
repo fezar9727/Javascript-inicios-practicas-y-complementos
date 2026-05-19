@@ -28,7 +28,7 @@ para crear validaciones de "lo que NO debe pasar".
 
 // * CONFIGURACIÓN INICIAL (Variables)
 
-// Función reutilizable que valida que el usuario escriba solo "si" o "no"
+// preguntarSiNo es una función reutilizable que valida que el usuario escriba solo "si" o "no"
 // Usa while(true) para repetir la pregunta indefinidamente hasta obtener una respuesta válida
 // Esto es más seguro que la recursión porque no tiene riesgo de colapsar el navegador
 function preguntarSiNo(pregunta) {
@@ -42,10 +42,12 @@ function preguntarSiNo(pregunta) {
             return false;
         }
 
-        // Ahora sí es seguro usar .toLowerCase() porque ya sabemos que no es null
+        // Ahora sí es seguro usar .toLowerCase() porque ya sabemos que no es null 
+        // toLowerCase() se usa para convertir la respuesta a minúsculas automáticamente, 
+        // así funciona sin importar si el usuario escribe "SI", "Si" o "si"
         const respuestaLower = respuesta.toLowerCase();
 
-        // Si el usuario escribió "si" o "no", retorna el resultado y sale del while
+        // Si el usuario escribe "si" o "no", retorna el resultado 
         if (respuestaLower === 'si' || respuestaLower === 'no') {
             return respuestaLower === 'si';
         }
@@ -55,6 +57,7 @@ function preguntarSiNo(pregunta) {
     }
 }
 
+// Preguntamos al usuario sobre su estado de cuenta, suscripción, rol y bloqueo
 const tieneCuenta      = preguntarSiNo('¿Tienes cuenta? Escribe: si o no');
 const tieneSuscripcion = preguntarSiNo('¿Tienes suscripción activa? Escribe: si o no');
 const esAdministrador  = preguntarSiNo('¿Eres administrador? Escribe: si o no');

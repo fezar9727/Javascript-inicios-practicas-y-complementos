@@ -22,11 +22,8 @@ if(isNaN (edad)) {
     }
 }
 
-
-
-
-
 console.log('Finalizo el programa')
+
 
 // mis ejercicios con isNaN
 
@@ -73,10 +70,12 @@ if(isNaN(pesos)) {
     console.log(`Tienes el equivalente a $${dolares.toFixed(2)} dólares.`);
 }
 
+
+
+
 // 4-Pedir la temperatura actual si no es número avisa. 
 // Si es número y es mayor a 30 que diga "Hace calor en Cali"; 
 // si es menor a 15 que diga "Está haciendo frío"; de lo contrario "Clima agradable".
-
 
 const temp = prompt('¿A cuántos grados estamos?');
 
@@ -91,6 +90,9 @@ if(isNaN(temp)) {
         console.log('Clima agradable');
     }
 }
+
+
+
 
 // 5-Pedir al usuario su nombre, si ingresa un número muestra un error.
 //  Si ingresa texto, dale la bienvenida.
