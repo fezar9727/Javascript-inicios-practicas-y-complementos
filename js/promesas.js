@@ -124,3 +124,4 @@ Esto demuestra cómo las promesas permiten manejar tareas asíncronas sin detene
 ejecución del programa, y cómo el usuario puede interactuar para ver ambos escenarios
 posibles — éxito y falla — en tiempo real.
 */
+
