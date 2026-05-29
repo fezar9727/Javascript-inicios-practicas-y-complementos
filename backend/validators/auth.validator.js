@@ -1,4 +1,6 @@
 const { body } = require('express-validator');
+const { notify } = require('../routes/auth.routes');
+
 
 const registerValidator = [
     body('nombre')
@@ -12,7 +14,16 @@ const registerValidator = [
         .isStrongPassword().withMessage('La contraseña debe tener al menos 8 caracteres, mayúsculas, minúsculas, números y simbolos o caracteres especiales')
 ]
 
+const loginValidator = [
+    body('email')
+        .notEmpty().withMessage('El email es obligatorio')
+        .isEmail().withMessage('Debes enviar un email valido'), 
+    body('password')
+        .notEmpty().withMessage('La contraseña es obligatoria')
+];
+
 module.exports = {
-    registerValidator
+    registerValidator,
+    loginValidator
 }
 
