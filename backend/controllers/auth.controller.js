@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const registrar = async(request, response) => {
     try {
@@ -40,10 +41,16 @@ const login = async(request, response) => {
         const passwordsCoinciden = await bcrypt.compare(password, user.password);
         if(!passwordsCoinciden) return response.status(400).json({ msg: "Contraseña incorrecta" });
 
-        
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        )
+
+
 
         response.json({
-            msg: "Iniciaste sesión correctamente!!"
+            token
         });
 
     } catch(error) {
