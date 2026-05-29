@@ -31,9 +31,28 @@ const registrar = async(request, response) => {
 
 };
 
+const login = async(request, response) => {
+    try {
+        const { email, password } = request.body;
+        const user = await User.findOne({ email });
+        if(!user) return response.status(400).json({ msg: "El usuario no existe en la base de datos" });
+    
+        const passwordsCoinciden = await bcrypt.compare(password, user.password);
+        if(!passwordsCoinciden) return response.status(400).json({ msg: "Contraseña incorrecta" });
+        response.json({
+            msg: "Iniciaste sesión correctamente!!"
+        });
+
+    } catch(error) {
+        
+        return response.status(500).json({ error: error.message });
+    }
+};
+
 
 module.exports = {
-    registrar 
+    registrar,
+    login
 };
 
 
