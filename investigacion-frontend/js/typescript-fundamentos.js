@@ -1,6 +1,6 @@
 
 // ============================================================
-//  📘 INVESTIGACIÓN #1 — ¿QUÉ ES TYPESCRIPT? TIPOS Y FUNDAMENTOS
+//  📘 INVESTIGACIÓN #2 — ¿QUÉ ES TYPESCRIPT? TIPOS Y FUNDAMENTOS
 // ============================================================
 //
 //  NOTA IMPORTANTE SOBRE ESTE ARCHIVO:
@@ -1954,6 +1954,6 @@ console.log("║     Pick, Omit, Record, NonNullable, ReturnType          ║");
 console.log("║   ✓ tsconfig.json: opciones del compilador               ║");
 console.log("║   ✓ Conexión de todos estos conceptos con Angular        ║");
 console.log("║                                                          ║");
-console.log("║   Siguiente archivo: node 02_typescript_funciones.js     ║");
+console.log("║   Siguiente archivo: node 03_typescript_funciones.js     ║");
 console.log("╚══════════════════════════════════════════════════════════╝\n");
 Listo

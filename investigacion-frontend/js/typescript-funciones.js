@@ -1,5 +1,5 @@
 // ============================================================
-//  📘 INVESTIGACIÓN #2 — TYPESCRIPT: FUNCIONES TIPADAS
+//  📘 INVESTIGACIÓN #3 — TYPESCRIPT: FUNCIONES TIPADAS
 // ============================================================
 //
 //  NOTA IMPORTANTE SOBRE ESTE ARCHIVO:
@@ -1642,7 +1642,7 @@ async function main() {
   console.log("║   ✓ Factory/Currying: función que retorna función        ║");
   console.log("║   ✓ 8 buenas prácticas para proyectos Angular            ║");
   console.log("║                                                          ║");
-  console.log("║   Siguiente archivo: node 03_typescript_clases_interfaces.js ║");
+  console.log("║   Siguiente archivo: node 04_typescript_clases_interfaces.js ║");
   console.log("╚══════════════════════════════════════════════════════════╝\n");
 }
 

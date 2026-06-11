@@ -1,6 +1,6 @@
 
 // ============================================================
-//  📘 INVESTIGACIÓN #3 — TYPESCRIPT: CLASES E INTERFACES
+//  📘 INVESTIGACIÓN #4 — TYPESCRIPT: CLASES E INTERFACES
 // ============================================================
 //
 //  NOTA IMPORTANTE SOBRE ESTE ARCHIVO:
@@ -1664,7 +1664,7 @@ demoServicio().then(() => {
   console.log("║   ✓ Patrón Singleton con constructor privado             ║");
   console.log("║   ✓ Cómo todo esto se usa en Angular real                ║");
   console.log("║                                                          ║");
-  console.log("║   Siguiente archivo: node 04_typescript_buenas_practicas.js ║");
+  console.log("║   Siguiente archivo: node 05_typescript_buenas_practicas.js ║");
   console.log("╚══════════════════════════════════════════════════════════╝\n");
 });
 Listo
