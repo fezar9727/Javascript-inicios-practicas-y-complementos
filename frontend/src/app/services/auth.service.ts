@@ -16,4 +16,11 @@ export class AuthService {
       `${this.api}/auth/registrar`, 
       usuario);
   }
+
+  login(email: string, password: string) : Observable<any> {
+    return this.http.post(
+      `${this.api}/auth/login`,
+      { email, password }
+    )
+  }
 }
