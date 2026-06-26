@@ -3,3 +3,8 @@ export interface Task {
     titulo: string;
     usuario?: string;
 }
+
+export interface TaskResponse {
+    ok: boolean;
+    tasks: Task[];
+}

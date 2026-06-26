@@ -5,20 +5,24 @@
                 <div class="card-body">
                     <h2 class="text-center mb-4">
                         <strong>Iniciar Sesión</strong>
-                    </h2> 
+                    </h2>
 
-                    <div 
-                        class="alert alert-danger" 
-                        *ngIf="error"
+                    <div class="alert alert-success text-center" 
+                         *ngIf="mensajeExito"
+                    >
+                        {{ mensajeExito }}
+                    </div>
+
+                    <div class="alert alert-danger text-center" 
+                         *ngIf="error"
                     >
                         {{ error }}
                     </div>
 
                     <form 
                         [formGroup]="form" 
-                        (ngSubmit)="login()"
+                        (ngSubmit)="iniciarSesion()"
                     >
-
                         <div class="mb-3">
                             <label class="form-label">
                                 Email
@@ -33,7 +37,7 @@
                                 *ngIf="
                                 form.get('email')?.touched && 
                                 form.get('email')?.invalid
-                            "
+                                "
                             >
                                 El email es inválido.
                             </small>
@@ -67,6 +71,11 @@
                             {{ cargando ? 'Ingresando...' : 'Iniciar Sesión' }}
                         </button>
                     </form>
+
+                    <div class="text-center mt-3">
+                        <p class="mb-0">¿Aún no tienes cuenta?</p>
+                        <a routerLink="/register" class="text-decoration-none">Regístrate aquí</a>
+                    </div>
                 </div>
             </div>
         </div>
