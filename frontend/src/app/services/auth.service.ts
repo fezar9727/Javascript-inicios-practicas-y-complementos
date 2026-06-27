@@ -8,8 +8,6 @@ import { User, AuthResponse } from '../interfaces/user';
 export class AuthService {
   private http = inject(HttpClient);
   private api = environment.apiUrl;
-
-  // Estado reactivo: el Navbar se suscribe a esto para saber si mostrar login o logout
   private authSubject = new BehaviorSubject<boolean>(!!this.obtenerToken());
   authStatus$ = this.authSubject.asObservable();
 

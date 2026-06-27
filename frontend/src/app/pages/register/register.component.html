@@ -7,13 +7,6 @@
                         <strong>Registro</strong>
                     </h2>
 
-                    <div 
-                        class="alert alert-danger"
-                        *ngIf="error"
-                    >
-                        {{ error }}
-                    </div>
-
                     <form 
                         [formGroup]="form"
                         (ngSubmit)="registrar()"
@@ -60,28 +53,35 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">
-                                password
-                            </label>
-                            <input 
-                                type="password" 
-                                class="form-control"
-                                formControlName="password"
-                            >
+                            <label class="form-label">Password</label>
+                            
+                            <div class="input-group">
+                                <input 
+                                    [type]="passwordVisible ? 'text' : 'password'"
+                                    class="form-control"
+                                    formControlName="password"
+                                >
+                                <button 
+                                    type="button" 
+                                    class="btn btn-outline-secondary" 
+                                    (click)="togglePasswordVisibility()"
+                                >
+                                    <i class="bi" [ngClass]="passwordVisible ? 'bi-eye-slash' : 'bi-eye'"></i>
+                                </button>
+                            </div>
+
                             <small 
                                 class="text-danger"
-                                *ngIf="
-                                    form.get('password')?.touched && 
-                                    form.get('password')?.invalid
-                                "
+                                *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
                             >
-                                El password es requerida y debe tener al menos 6 caracteres
+                                El password debe tener al menos 5 caracteres.
                             </small>
                         </div>
 
                         <button
-                            class="btn btn-primary w-100"
-                            [disabled]="cargando"
+                            type="submit"
+                            class="btn w-100 btn-custom"
+                            [disabled]="cargando || form.invalid"
                         >
                             {{ cargando ? 'Registrando...' : 'Registrarse' }}
                         </button>

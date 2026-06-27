@@ -1,1 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --primary-blue: #0d6efd;
+    --primary-blue-hover: #0b5ed7;
+    --disabled-grey: #adb5bd;
+    --radius-main: 12px;
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+
+form .btn.btn-custom {
+    background-color: var(--primary-blue);
+    color: white;
+    border-radius: var(--radius-main);
+    padding: 10px;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+}
+
+form .btn.btn-custom:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background-color: var(--primary-blue-hover);
+}
+
+form .btn.btn-custom:disabled {
+    background-color: var(--disabled-grey);
+    color: #ffffff;
+    cursor: not-allowed;
+    opacity: 1;
+    box-shadow: none;
+}
+
+
+div.card.shadow {
+    border-radius: var(--radius-main);
+    border: none;
+    box-shadow: var(--shadow-soft);
+    background-color: #ffffff;
+}
+
+
+.swal2-container .swal2-popup {
+    border-radius: var(--radius-main); 
+    box-shadow: var(--shadow-hover);    
+}
+
+.swal2-toast {
+    border-radius: var(--radius-main);
+    box-shadow: var(--shadow-hover);
+    background-color: #ffffff;
+}
+
+.swal2-toast .swal2-title {
+    color: #333333;
+    font-weight: 500;
+}
+
+.swal2-styled.swal2-confirm {
+    border-radius: 8px; 
+    padding: 0.5em 1.5em;
+}

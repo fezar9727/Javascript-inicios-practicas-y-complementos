@@ -9,10 +9,9 @@ import {
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-// CAMBIO: Importamos AuthResponse
 import { User, AuthResponse } from '../../interfaces/user';
+import Swal from 'sweetalert2'; 
 
-// CAMBIO: Definimos la estructura del formulario para tipado fuerte
 interface RegisterForm {
   nombre: FormControl<string | null>;
   email: FormControl<string | null>;
@@ -36,19 +35,23 @@ export class RegisterComponent {
   private router = inject(Router);
 
   cargando: boolean = false;
-  error: string = '';
+  passwordVisible: boolean = false; 
 
-  // CAMBIO: Aplicamos tipado fuerte al FormGroup
   form = this.fb.group<RegisterForm>({
     nombre: this.fb.control('', [Validators.required, Validators.minLength(3)]),
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', [Validators.required, Validators.minLength(5)])
   });
 
-  // CAMBIO: Método seguro para extraer datos
+  
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
   private getRawValue(): User {
     return this.form.getRawValue() as User;
   }
+
 
   registrar() {
     if(this.form.invalid) {
@@ -62,21 +65,50 @@ export class RegisterComponent {
     this.authService.registrar(userData)
         .subscribe({
           next: (response: AuthResponse) => {
-            // 1. Log de éxito
-            console.log('Usuario registrado con éxito:', response);
-
-            // 2. Si tu API devuelve token al registrar, descomenta estas líneas:
-            // this.authService.guardarToken(response.token);
-            
             this.cargando = false;
-            alert('Usuario registrado correctamente.');
-            this.router.navigate(['/login']);
+
+            
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
+
+            Toast.fire({
+              icon: 'success',
+              title: 'Usuario registrado correctamente'
+            }).then(() => {
+              this.router.navigate(['/login']);
+            });
           },
           error: (error) => {
-            // 3. Log de error (el estándar que definimos)
-            console.error('Error al registrar usuario:', error);
             this.cargando = false;
-            this.error = error.error?.errors?.[0]?.msg || error.error?.msg || 'Error al registrar el usuario.';
+            
+            
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              }
+            });
+
+            const mensajeError = error.error?.errors?.[0]?.msg || error.error?.msg || 'Error al registrar el usuario.';
+            
+            Toast.fire({
+              icon: 'error',
+              title: mensajeError
+            });
           }
         });
   }
