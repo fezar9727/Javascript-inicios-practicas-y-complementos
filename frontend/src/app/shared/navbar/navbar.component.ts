@@ -5,8 +5,7 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true, // standalone permite que este componente gestione sus propias dependencias,
-                    // facilitando la reutilización y eliminando la necesidad de módulos pesados.
+  standalone: true, // standalone permite que este componente gestione sus propias dependencias facilitando la reutilización y eliminando la necesidad de módulos pesados. 
   imports: [
     CommonModule,
     RouterLink
@@ -15,12 +14,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  // Inyección de dependencias moderna
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Exponemos el estado directamente del servicio. 
-  // El pipe | async en el HTML se encargará de la suscripción.
   isLoggedIn$ = this.authService.authStatus$;
 
   logout(): void {
