@@ -34,12 +34,26 @@ export class LoginComponent {
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
-  
 
   form = this.fb.group<LoginForm>({
     email: this.fb.control('', [Validators.required, Validators.email]),
     password: this.fb.control('', [Validators.required, Validators.minLength(5)])
   });
+
+  // MUEVE ESTO AQUÍ: Método centralizado para los toasts
+  private mostrarToast(icon: 'success' | 'error', title: string): void {
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: icon === 'success' ? 3000 : 4000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    }).fire({ icon, title });
+  }
 
   iniciarSesion() {
     if (this.form.invalid) {
@@ -55,50 +69,17 @@ export class LoginComponent {
         next: (response: AuthResponse) => {
           this.authService.guardarToken(response.token);
           this.cargando = false;
-
-
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-
-          Toast.fire({
-            icon: 'success',
-            title: 'Sesión iniciada correctamente'
-          }).then(() => {
-            this.router.navigate(['/tasks']);
-          });
+          
+          // USO REEMPLAZADO AQUÍ
+          this.mostrarToast('success', 'Sesión iniciada correctamente');
+          this.router.navigate(['/tasks']);
         },
         error: (error) => {
           this.cargando = false;
           
-          
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 4000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
-            }
-          });
-
-          
+          // USO REEMPLAZADO AQUÍ
           const mensajeError = error.error?.errors?.[0]?.msg || error.error?.msg || 'Error al iniciar sesión.';
-          
-          Toast.fire({
-            icon: 'error',
-            title: mensajeError
-          });
+          this.mostrarToast('error', mensajeError);
         }
       });
   }

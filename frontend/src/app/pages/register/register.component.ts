@@ -43,7 +43,6 @@ export class RegisterComponent {
     password: this.fb.control('', [Validators.required, Validators.minLength(5)])
   });
 
-  
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
@@ -52,6 +51,20 @@ export class RegisterComponent {
     return this.form.getRawValue() as User;
   }
 
+  // MÉTODO CENTRALIZADO: Mantiene toda la configuración de Toast en un solo lugar
+  private mostrarToast(icon: 'success' | 'error', title: string): void {
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: icon === 'success' ? 3000 : 4000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    }).fire({ icon, title });
+  }
 
   registrar() {
     if(this.form.invalid) {
@@ -66,49 +79,17 @@ export class RegisterComponent {
         .subscribe({
           next: (response: AuthResponse) => {
             this.cargando = false;
-
             
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-
-            Toast.fire({
-              icon: 'success',
-              title: 'Usuario registrado correctamente'
-            }).then(() => {
-              this.router.navigate(['/login']);
-            });
+            // Lógica optimizada y limpia
+            this.mostrarToast('success', 'Usuario registrado correctamente');
+            this.router.navigate(['/login']);
           },
           error: (error) => {
             this.cargando = false;
             
-            
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 4000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-
+            // Lógica optimizada y limpia
             const mensajeError = error.error?.errors?.[0]?.msg || error.error?.msg || 'Error al registrar el usuario.';
-            
-            Toast.fire({
-              icon: 'error',
-              title: mensajeError
-            });
+            this.mostrarToast('error', mensajeError);
           }
         });
   }

@@ -1,0 +1,33 @@
+/* login.component.css - Estilos aislados para este componente */
+
+/* 1. Mantenemos la tarjeta limpia sin alterar el grid de Bootstrap */
+.card {
+    overflow: hidden;
+}
+
+/* 2. Ajuste específico para el grupo de input del password */
+/* Solo afecta a los .input-group dentro de este Login, 
+   sin tocar otros elementos de la app */
+:host .input-group .btn-outline-secondary {
+    border-left: none;
+    background: transparent;
+}
+
+:host .input-group .form-control:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+}
+
+/* 3. Asegurar que los mensajes de error no causen saltos en el layout */
+.text-danger {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* 4. Aseguramos que el contenedor del formulario sea flexible 
+   pero que no fuerce un ancho fijo que rompa Bootstrap */
+:host {
+    display: block;
+    width: 100%;
+}
