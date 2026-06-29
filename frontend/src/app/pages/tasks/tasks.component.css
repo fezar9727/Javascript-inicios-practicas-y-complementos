@@ -1,0 +1,98 @@
+/* ==========================================================================
+   ESTILOS COMPONENTE TASKS
+   ========================================================================== */
+
+/* Botón de Nueva Tarea */
+.btn-success-custom {
+    background-color: var(--success-green);
+    color: white;
+    border-radius: var(--radius-main);
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-success-custom:hover {
+    background-color: var(--success-green-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    color: white;
+}
+
+/* Tarjeta de Tarea */
+.task-card {
+    cursor: pointer;
+    border-radius: var(--radius-main);
+    border: none;
+    background-color: #ffffff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.task-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* Ajuste de jerarquía visual (Título Mis Tareas) */
+h1.h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+/* Mejora del mensaje cuando está vacío */
+.alert-info {
+    border-radius: var(--radius-main);
+    border: none;
+    background-color: #e7f1ff;
+    color: #084298;
+    padding: 20px;
+}
+
+/* Estilo del input (la barra de texto) */
+.input-group .form-control {
+    border-radius: var(--radius-main) 0 0 var(--radius-main);
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+}
+
+/* Ajuste del botón dentro del input */
+.input-group .btn-success-custom {
+    border-radius: 0 var(--radius-main) var(--radius-main) 0;
+    margin: 0;
+}
+
+
+/* Estilo para la barra de progreso */
+.progress-sm {
+    height: 10px;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilo profesional para la letra pequeña del porcentaje */
+.task-percentage {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.task-title-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
+}

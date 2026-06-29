@@ -2,6 +2,9 @@
     --primary-blue: #0d6efd;
     --primary-blue-hover: #0b5ed7;
     --disabled-grey: #adb5bd;
+    --success-green: #198754;
+    --success-green-hover: #157347;
+
     --radius-main: 12px;
     --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -62,3 +65,5 @@ div.card.shadow {
     border-radius: 8px; 
     padding: 0.5em 1.5em;
 }
+
+

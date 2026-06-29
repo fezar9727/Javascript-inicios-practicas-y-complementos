@@ -1,1 +1,78 @@
-<p>tasks works!</p>
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Mis Tareas</h1>
+    <button class="btn btn-success-custom" (click)="alternarFormulario()">
+      <i class="bi" [ngClass]="mostrarFormulario ? 'bi-x-circle' : 'bi-plus-circle'"></i> 
+      {{ mostrarFormulario ? 'Cancelar' : 'Nueva Tarea' }}
+    </button>
+  </div>
+
+  
+  <div class="card shadow p-3 mb-4" *ngIf="mostrarFormulario">
+    <div class="card-body p-0">
+      <h6 class="mb-3">Nueva Tarea</h6>
+      <form [formGroup]="taskForm" (ngSubmit)="crearNuevaTarea()" class="input-group">
+        <input formControlName="titulo" type="text" class="form-control" placeholder="Ingrese una tarea...">
+        
+        <button type="submit" [disabled]="taskForm.invalid" class="btn btn-success-custom">
+          Crear
+        </button>
+      </form>
+    </div>
+  </div>
+  
+
+  <div *ngIf="cargando" class="text-center p-5">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+
+  <div *ngIf="!cargando && tasks.length === 0 && !mostrarFormulario" class="alert alert-info text-center">
+    No tienes tareas pendientes. ¡Crea una nueva!
+  </div>
+
+  <div class="row align-items-stretch" *ngIf="!cargando && tasks.length > 0">
+    <div class="col-md-4 mb-3" *ngFor="let task of tasks">
+
+      <div class="card task-card h-100" (click)="toggleDetalles(task._id)">
+        <div class="card-body">
+          <h5 class="card-title d-flex justify-content-between" [title]="task.titulo">
+            <span class="task-title-truncate">{{ task.titulo }}</span>
+            <small class="task-percentage">{{ task.completado ? '100%' : '0%' }}</small>
+          </h5>
+
+          <div class="progress progress-sm">
+            <div class="progress-bar" 
+                [ngClass]="task.completado ? 'bg-success' : 'bg-info'"
+                [style.width.%]="task.completado ? 100 : 0">  <!-- Binding dinámico de Angular: esta propiedad es parte de la lógica funcional del componente y no debe confundirse con una mala práctica de estilos CSS estáticos. ! -->
+                
+            </div>
+          </div>
+          
+          <div *ngIf="tareaExpandidaId === task._id" class="mt-3 p-2 border-top bg-light rounded">
+            <p class="small text-muted mb-0">
+              <strong>Detalles:</strong> {{ task.descripcion || 'Esta tarea no tiene una descripción detallada.' }}
+            </p>
+          </div>
+
+          <span class="badge mt-3 mb-3" [ngClass]="task.completado ? 'bg-success' : 'bg-warning'">
+            {{ task.completado ? 'Completada' : 'Pendiente' }}
+          </span>
+
+          <div class="d-grid">
+            <button (click)="$event.stopPropagation(); marcarCompletado(task)" 
+                    class="btn btn-sm mb-2" 
+                    [ngClass]="task.completado ? 'btn-outline-secondary' : 'btn-outline-primary'">
+              {{ task.completado ? 'Desmarcar' : 'Completar' }}
+            </button>
+
+            <button (click)="$event.stopPropagation(); eliminarTarea(task._id)" 
+                    class="btn btn-sm btn-outline-danger">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
